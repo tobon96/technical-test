@@ -1,7 +1,9 @@
 package com.wolox.technicalTest;
 
+import com.wolox.technicalTest.models.dtos.UserResponseDto;
 import com.wolox.technicalTest.models.entities.User;
 import com.wolox.technicalTest.repositories.UserRepository;
+import com.wolox.technicalTest.services.ApiService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,11 @@ import java.util.List;
 @SpringBootTest
 class TechnicalTestApplicationTests {
 
-	@Autowired
-	private RestTemplate restTemplate;
+	@Autowired RestTemplate restTemplate;
 
 	@Test
-	void contextLoads() {
+	void contextLoads() throws Exception {
+
 	}
 
 }
