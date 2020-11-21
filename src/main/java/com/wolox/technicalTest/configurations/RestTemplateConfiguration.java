@@ -11,6 +11,7 @@ import org.springframework.web.util.UriTemplateHandler;
 @Configuration
 public class RestTemplateConfiguration {
 
+    // Adding RestTemplate to the path. Can be used now as an instance
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
         UriTemplateHandler uriTemplateHandler = new RootUriTemplateHandler(UtilConstants.API_URL);

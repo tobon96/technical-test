@@ -1,6 +1,6 @@
 package com.wolox.technicalTest.errors;
 
-import com.wolox.technicalTest.models.dtos.ErrorResponse;
+import com.wolox.technicalTest.models.dtos.ErrorResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,7 +16,7 @@ public class ControllerErrorHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handlerErrorValidacion(MethodArgumentNotValidException exception) {
 
-        ErrorResponse detalleError = ErrorResponse.builder()
+        ErrorResponseDto detalleError = ErrorResponseDto.builder()
                 .timestamp(new Date())
                 .error("Error validando los campos del objeto")
                 .detalle(Objects.requireNonNull(exception.getBindingResult().getFieldError()).getDefaultMessage())
