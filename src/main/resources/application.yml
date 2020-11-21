@@ -1,0 +1,16 @@
+spring:
+    application:
+        name: WOLOX_ALBUMS
+
+    jpa:
+        show-sql: false
+        database: sql_server
+
+    datasource:
+        url: jdbc:sqlserver://wolox-database.c8xzp5eh7jrg.us-east-1.rds.amazonaws.com:1433;DatabaseName=WOLOX_ALBUMS
+        username: admin
+        password: Pse01945RDS
+        driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+server:
+    port: 9666
