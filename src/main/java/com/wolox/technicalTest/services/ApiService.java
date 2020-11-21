@@ -53,9 +53,21 @@ public class ApiService {
     }
 
     ///// Photos
-    public List<PhotosResponseDto> getPhotos() throws Exception {
+    public List<PhotosResponseDto> getAllPhotos() throws Exception {
 
         ResponseEntity<PhotosResponseDto[]> response = restTemplate.getForEntity("/photos", PhotosResponseDto[].class, request);
+
+        if (response.getStatusCode().equals(HttpStatus.OK) && response.getBody() != null) {
+            return Arrays.asList(response.getBody());
+        }else {
+            throw new Exception(response.getStatusCode().toString());
+        }
+
+    }
+
+    public List<PhotosResponseDto> getUserPhotos(int id) throws Exception {
+
+        ResponseEntity<PhotosResponseDto[]> response = restTemplate.getForEntity("/photos?user" + id, PhotosResponseDto[].class, request);
 
         if (response.getStatusCode().equals(HttpStatus.OK) && response.getBody() != null) {
             return Arrays.asList(response.getBody());

@@ -14,4 +14,5 @@ public final class ControllerConstants {
 
     //// Photos
     public static final String PHOTOS_BASE = "/photos";
+    public static final String PHOTOS_USER = "/user/{id}";
 }

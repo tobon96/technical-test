@@ -21,8 +21,13 @@ public class PhotosController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<PhotosResponseDto>> getPhotos() throws Exception {
-        return ResponseEntity.ok().body(apiService.getPhotos());
+    ResponseEntity<List<PhotosResponseDto>> getAllPhotos() throws Exception {
+        return ResponseEntity.ok().body(apiService.getAllPhotos());
+    }
+
+    @GetMapping(value = ControllerConstants.PHOTOS_USER, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<PhotosResponseDto>> getUserPhotos(@PathVariable int id) throws Exception {
+        return ResponseEntity.ok().body(apiService.getUserPhotos(id));
     }
 
     @GetMapping(value = ControllerConstants.ID_BASE, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -15,6 +15,6 @@ public class PhotosResponseDto {
     private int id;
     private String title;
     private String url;
-    private String thumbnail;
+    private String thumbnailUrl;
 
 }
