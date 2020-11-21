@@ -26,7 +26,7 @@ public class PhotosController {
     }
 
     @GetMapping(value = ControllerConstants.ID_BASE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<PhotosResponseDto> getUser(@PathVariable int id) throws Exception {
+    ResponseEntity<PhotosResponseDto> getPhoto(@PathVariable int id) throws Exception {
         return ResponseEntity.ok().body(apiService.getPhoto(id));
     }
 }

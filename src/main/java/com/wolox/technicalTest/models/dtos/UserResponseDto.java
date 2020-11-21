@@ -15,6 +15,7 @@ public class UserResponseDto {
     private int id;
     private String name;
     private String username;
+    private String email;
 
     @JsonProperty("address")
     private UserAddressDto userAddress;

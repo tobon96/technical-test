@@ -23,8 +23,6 @@ class TechnicalTestApplicationTests {
 	@Test
 	void contextLoads() throws Exception {
 
-		ApiService apiService = new ApiService(restTemplate);
-		List<UserResponseDto> users = apiService.getUsers();
 	}
 
 }

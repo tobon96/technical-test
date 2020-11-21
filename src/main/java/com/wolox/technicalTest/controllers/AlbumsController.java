@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(ControllerConstants.USERS_BASE)
+@RequestMapping(ControllerConstants.ALBUMS_BASE)
 @CrossOrigin
 public class AlbumsController {
 
