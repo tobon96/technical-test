@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 public class ApiService {
 
     private final HttpHeaders headers = new HttpHeaders();
-
     private final RestTemplate restTemplate;
     private final HttpEntity<String> request;
 
