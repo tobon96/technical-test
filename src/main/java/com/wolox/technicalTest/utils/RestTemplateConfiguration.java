@@ -1,4 +1,4 @@
-package com.wolox.technicalTest.configurations;
+package com.wolox.technicalTest.utils;
 
 import com.wolox.technicalTest.constants.UtilConstants;
 import org.springframework.boot.web.client.RestTemplateBuilder;
