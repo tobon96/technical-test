@@ -18,4 +18,7 @@ public final class ControllerConstants {
 
     //// Comments
     public static final String COMMENTS_BASE = "/comments";
+
+    //// Permit Management
+    public static final String PERMITS_BASE = "/permits";
 }

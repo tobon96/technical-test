@@ -18,7 +18,7 @@ public class ControllerErrorHandler {
 
         ErrorResponseDto detalleError = ErrorResponseDto.builder()
                 .timestamp(new Date())
-                .error("Error validando los campos del objeto")
+                .error("Error validatin request object fields")
                 .detalle(Objects.requireNonNull(exception.getBindingResult().getFieldError()).getDefaultMessage())
                 .build();
         return new ResponseEntity<>(detalleError, HttpStatus.BAD_REQUEST);

@@ -13,11 +13,10 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "ALBUMS_USERS_PERMITS")
+@IdClass(AlbumsUserPermitCompositeKey.class)
 public class AlbumUserPermit {
 
     @Id
-    private int id;
-
     @Column(name = "album_id")
     private int albumId;
 
@@ -32,6 +31,7 @@ public class AlbumUserPermit {
     @JoinColumn(name = "permit", insertable = false, updatable = false)
     private Permit permit;
 
+    @Id
     @Column(name = "user_id")
     private int userId;
 

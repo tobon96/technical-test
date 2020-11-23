@@ -1,5 +1,6 @@
 package com.wolox.technicalTest.services;
 
+import com.wolox.technicalTest.constants.UtilConstants;
 import com.wolox.technicalTest.models.dtos.AlbumResponseDto;
 import com.wolox.technicalTest.models.dtos.CommentResponseDto;
 import com.wolox.technicalTest.models.dtos.PhotosResponseDto;
@@ -110,7 +111,7 @@ public class ApiService {
 
     public List<AlbumResponseDto> getUserAlbums(int id) throws Exception {
 
-        ResponseEntity<AlbumResponseDto[]> response = restTemplate.getForEntity("/user/" + id + "/albums", AlbumResponseDto[].class, request);
+        ResponseEntity<AlbumResponseDto[]> response = restTemplate.getForEntity("/users/" + id + "/albums", AlbumResponseDto[].class, request);
 
         if (response.getStatusCode().equals(HttpStatus.OK) && response.getBody() != null) {
             return Arrays.asList(response.getBody());
@@ -137,9 +138,9 @@ public class ApiService {
         List<CommentResponseDto> response = null;
 
         if(user.isPresent()) {
-            response = getComments("/comments?emaill=" + getUser(user.get()).getEmail());
+            response = getComments(UtilConstants.COMMENTS_EMAIL + getUser(user.get()).getEmail());
         } else {
-            response = name.isPresent() ? getComments("/comments?name=" + name) : getComments("/comments");
+            response = name.isPresent() ? getComments(UtilConstants.COMMENTS_NAME + name) : getComments(UtilConstants.COMMENTS_BASE);
         }
 
         return response;
