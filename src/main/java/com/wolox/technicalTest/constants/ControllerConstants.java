@@ -15,4 +15,10 @@ public final class ControllerConstants {
     //// Photos
     public static final String PHOTOS_BASE = "/photos";
     public static final String PHOTOS_USER = "/user/{id}";
+
+    //// Comments
+    public static final String COMMENTS_BASE = "/comments";
+
+    //// Permit Management
+    public static final String PERMITS_BASE = "/permits";
 }

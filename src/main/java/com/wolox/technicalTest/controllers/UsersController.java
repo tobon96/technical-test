@@ -1,7 +1,7 @@
 package com.wolox.technicalTest.controllers;
 
 import com.wolox.technicalTest.constants.ControllerConstants;
-import com.wolox.technicalTest.models.dtos.UserResponseDto;
+import com.wolox.technicalTest.models.dtos.UserResponse.UserResponseDto;
 import com.wolox.technicalTest.services.ApiService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
