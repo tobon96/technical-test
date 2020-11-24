@@ -10,4 +10,7 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
     @Override
     List<User> findAll();
+
+    @Override
+    List<User> findAllById(Iterable<Integer> integers);
 }

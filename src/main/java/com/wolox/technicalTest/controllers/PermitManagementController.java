@@ -41,19 +41,19 @@ public class PermitManagementController {
 
         SharedAlbumResponseDto responseDto = permitManagementService.updatePermitForUser(requestDto);
         if(responseDto.getError() != null) {
-            return new ResponseEntity<>(responseDto, HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+            return new ResponseEntity<>(responseDto, HttpStatus.ACCEPTED);
         }
 
     }
 
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SharedAlbumResponseDto> getUsersByPermitOverAlbum(@RequestParam Optional<String> permit, @RequestParam Optional<Integer> album) {
 
         SharedAlbumResponseDto responseDto = permitManagementService.getUsersByPermitOverAlbum(permit, album);
         if(responseDto.getError() != null) {
-            return new ResponseEntity<>(responseDto, HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
         } else {
             return new ResponseEntity<>(responseDto, HttpStatus.OK);
         }

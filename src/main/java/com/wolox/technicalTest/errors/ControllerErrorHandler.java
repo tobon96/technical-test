@@ -1,6 +1,6 @@
 package com.wolox.technicalTest.errors;
 
-import com.wolox.technicalTest.models.dtos.ErrorResponseDto;
+import com.wolox.technicalTest.models.dtos.RequestResponses.ErrorResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,8 +18,8 @@ public class ControllerErrorHandler {
 
         ErrorResponseDto detalleError = ErrorResponseDto.builder()
                 .timestamp(new Date())
-                .error("Error validatin request object fields")
-                .detalle(Objects.requireNonNull(exception.getBindingResult().getFieldError()).getDefaultMessage())
+                .error("Error validating request object fields")
+                .detail(Objects.requireNonNull(exception.getBindingResult().getFieldError()).getDefaultMessage())
                 .build();
         return new ResponseEntity<>(detalleError, HttpStatus.BAD_REQUEST);
     }

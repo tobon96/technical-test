@@ -3,18 +3,22 @@ package com.wolox.technicalTest.services;
 import com.wolox.technicalTest.models.dtos.AlbumResponseDto;
 import com.wolox.technicalTest.models.dtos.SharedAlbumRequestDto;
 import com.wolox.technicalTest.models.dtos.SharedAlbumResponseDto;
-import com.wolox.technicalTest.models.dtos.UserResponseDto;
+import com.wolox.technicalTest.models.dtos.UserResponse.UserResponseDto;
 import com.wolox.technicalTest.models.entities.*;
 import com.wolox.technicalTest.repositories.AlbumRepository;
 import com.wolox.technicalTest.repositories.AlbumUserPermitsRepository;
 import com.wolox.technicalTest.repositories.PermitRepository;
 import com.wolox.technicalTest.repositories.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class PermitManagementService {
 
     private final ApiService apiService;
@@ -77,7 +81,7 @@ public class PermitManagementService {
         }
 
         if(permit.isEmpty()) {
-            responseDto.setMessage("Provided permit doesn't exist");
+            responseDto.setError("Provided permit doesn't exist");
             return responseDto;
         }
 
@@ -94,7 +98,7 @@ public class PermitManagementService {
                 .userId(requestDto.getUserToBeSharedId())
                 .build());
 
-        responseDto.setMessage("Permit granted for user " + requestDto.getUserToBeSharedId() + " over album " + requestDto.getAlbumId());
+        responseDto.setAction("Permit granted for user " + requestDto.getUserToBeSharedId() + " over album " + requestDto.getAlbumId());
         return responseDto;
     }
 
@@ -108,7 +112,7 @@ public class PermitManagementService {
         Optional<Permit> permit = permitRepository.findByPermit(requestDto.getPermit());
 
         if(permit.isEmpty()) {
-            responseDto.setMessage("Provided permit doesn't exist");
+            responseDto.setError("Provided permit doesn't exist");
             return responseDto;
         }
 
@@ -128,16 +132,42 @@ public class PermitManagementService {
             return responseDto;
         }
 
-        responseDto.setMessage("Permit granted for user " + requestDto.getUserToBeSharedId() + " over album " + requestDto.getAlbumId());
+        responseDto.setDetail("Permit granted for user " + requestDto.getUserToBeSharedId() + " over album " + requestDto.getAlbumId());
         return responseDto;
     }
 
-    public SharedAlbumResponseDto getUsersByPermitOverAlbum(Optional<String> permit, Optional<Integer> album) {
+    public SharedAlbumResponseDto getUsersByPermitOverAlbum(Optional<String> userPermit, Optional<Integer> album) {
 
         SharedAlbumResponseDto responseDto = SharedAlbumResponseDto.builder()
                 .timeStamp(new Date())
-                .action("User permit update over album")
+                .action("Get users given a permit and an albumId")
                 .build();
+
+        if(userPermit.isPresent() && album.isPresent()) {
+
+            Optional<Permit> permit = permitRepository.findByPermit(userPermit.get());
+            if(permit.isEmpty()) {
+                responseDto.setError("The provided permit does not exist");
+                return null;
+            }
+
+            List<AlbumUserPermit> usersPermits = albumUserPermitsRepository.findAllByAlbum_IdAndPermit_Id(album.get(), permit.get().getId());
+
+            responseDto.setUsers(userRepository.findAllById(usersPermits.stream()
+                    .map(AlbumUserPermit::getUserId)
+                    .collect(Collectors.toList()))
+                    .stream().map(user -> {
+                        try {
+                            return apiService.getUser(user.getId());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }).collect(Collectors.toList()));
+
+            responseDto.setDetail("Users successfully retrieved for album " + album + " with permit " + permit.get().getPermit());
+        }
+
 
         return responseDto;
     }

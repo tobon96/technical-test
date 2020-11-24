@@ -4,7 +4,7 @@ import com.wolox.technicalTest.constants.UtilConstants;
 import com.wolox.technicalTest.models.dtos.AlbumResponseDto;
 import com.wolox.technicalTest.models.dtos.CommentResponseDto;
 import com.wolox.technicalTest.models.dtos.PhotosResponseDto;
-import com.wolox.technicalTest.models.dtos.UserResponseDto;
+import com.wolox.technicalTest.models.dtos.UserResponse.UserResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -43,7 +43,7 @@ public class ApiService {
 
     public UserResponseDto getUser(int id) throws Exception {
 
-        ResponseEntity<UserResponseDto> response = restTemplate.getForEntity("/users", UserResponseDto.class, request);
+        ResponseEntity<UserResponseDto> response = restTemplate.getForEntity("/users/" + id, UserResponseDto.class, request);
 
         if (response.getStatusCode().equals(HttpStatus.OK) && response.getBody() != null) {
             return response.getBody();

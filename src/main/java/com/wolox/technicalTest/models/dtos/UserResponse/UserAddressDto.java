@@ -1,4 +1,4 @@
-package com.wolox.technicalTest.models.dtos;
+package com.wolox.technicalTest.models.dtos.UserResponse;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

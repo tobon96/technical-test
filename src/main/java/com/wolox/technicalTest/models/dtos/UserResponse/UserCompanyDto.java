@@ -1,4 +1,4 @@
-package com.wolox.technicalTest.models.dtos;
+package com.wolox.technicalTest.models.dtos.UserResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserGeoDto {
+public class UserCompanyDto {
 
-    private String lat;
-    private String lng;
+    private String name;
+    private String catchPhrase;
+    private String bs;
 }
