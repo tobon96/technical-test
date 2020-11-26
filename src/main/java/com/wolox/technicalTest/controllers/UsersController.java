@@ -2,7 +2,7 @@ package com.wolox.technicalTest.controllers;
 
 import com.wolox.technicalTest.constants.ControllerConstants;
 import com.wolox.technicalTest.models.dtos.UserResponse.UserResponseDto;
-import com.wolox.technicalTest.services.ApiService;
+import com.wolox.technicalTest.services.apiServices.implementations.UsersApiService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +14,9 @@ import java.util.List;
 @CrossOrigin
 public class UsersController {
 
-    private final ApiService apiService;
+    private final UsersApiService apiService;
 
-    public UsersController(ApiService apiService) {
+    public UsersController(UsersApiService apiService) {
         this.apiService = apiService;
     }
 

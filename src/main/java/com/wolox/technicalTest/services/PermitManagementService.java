@@ -9,6 +9,8 @@ import com.wolox.technicalTest.repositories.AlbumRepository;
 import com.wolox.technicalTest.repositories.AlbumUserPermitsRepository;
 import com.wolox.technicalTest.repositories.PermitRepository;
 import com.wolox.technicalTest.repositories.UserRepository;
+import com.wolox.technicalTest.services.apiServices.implementations.AlbumsApiService;
+import com.wolox.technicalTest.services.apiServices.implementations.UsersApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +23,16 @@ import java.util.stream.Collectors;
 @Slf4j
 public class PermitManagementService {
 
-    private final ApiService apiService;
+    private final UsersApiService usersApiService;
+    private final AlbumsApiService albumsApiService;
     private final UserRepository userRepository;
     private final AlbumRepository albumRepository;
     private final PermitRepository permitRepository;
     private final AlbumUserPermitsRepository albumUserPermitsRepository;
 
-    public PermitManagementService(ApiService apiService, UserRepository userRepository, AlbumRepository albumRepository, PermitRepository permitRepository, AlbumUserPermitsRepository albumUserPermitsRepository) {
-        this.apiService = apiService;
+    public PermitManagementService(UsersApiService usersApiService, AlbumsApiService albumsApiService, UserRepository userRepository, AlbumRepository albumRepository, PermitRepository permitRepository, AlbumUserPermitsRepository albumUserPermitsRepository) {
+        this.usersApiService = usersApiService;
+        this.albumsApiService = albumsApiService;
         this.userRepository = userRepository;
         this.albumRepository = albumRepository;
         this.permitRepository = permitRepository;
@@ -48,7 +52,7 @@ public class PermitManagementService {
 
         if(user.isEmpty()) {
             try{
-                UserResponseDto newUser = apiService.getUser(requestDto.getUserToBeSharedId());
+                UserResponseDto newUser = usersApiService.getUser(requestDto.getUserToBeSharedId());
 
                 if(newUser != null) {
                     userRepository.save(User.builder()
@@ -65,7 +69,7 @@ public class PermitManagementService {
 
         if(album.isEmpty()) {
             try{
-                AlbumResponseDto newAlbum = apiService.getAlbum(requestDto.getAlbumId());
+                AlbumResponseDto newAlbum = albumsApiService.getAlbum(requestDto.getAlbumId());
 
                 if(newAlbum != null) {
                     albumRepository.save(Album.builder()
@@ -158,7 +162,7 @@ public class PermitManagementService {
                     .collect(Collectors.toList()))
                     .stream().map(user -> {
                         try {
-                            return apiService.getUser(user.getId());
+                            return usersApiService.getUser(user.getId());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -167,7 +171,6 @@ public class PermitManagementService {
 
             responseDto.setDetail("Users successfully retrieved for album " + album + " with permit " + permit.get().getPermit());
         }
-
 
         return responseDto;
     }
