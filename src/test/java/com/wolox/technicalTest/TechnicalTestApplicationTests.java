@@ -14,11 +14,6 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootTest
 class TechnicalTestApplicationTests {
 
-	@Autowired RestTemplate restTemplate;
-	@Autowired ApiService apiService;
-	@Autowired UserRepository userRepository;
-	@Autowired AlbumRepository albumRepository;
-
 	@Test
 	void contextLoads() {
 	}

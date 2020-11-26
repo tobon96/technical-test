@@ -172,7 +172,6 @@ public class PermitManagementService {
             responseDto.setDetail("Users successfully retrieved for album " + album + " with permit " + permit.get().getPermit());
         }
 
-
         return responseDto;
     }
 }
