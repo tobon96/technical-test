@@ -2,7 +2,8 @@ package com.wolox.technicalTest.controllers;
 
 import com.wolox.technicalTest.constants.ControllerConstants;
 import com.wolox.technicalTest.models.dtos.AlbumResponseDto;
-import com.wolox.technicalTest.services.ApiService;
+import com.wolox.technicalTest.services.apiServices.ApiService;
+import com.wolox.technicalTest.services.apiServices.implementations.AlbumsApiService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,9 @@ import java.util.List;
 @CrossOrigin
 public class AlbumsController {
 
-    private final ApiService apiService;
+    private final AlbumsApiService apiService;
 
-    public AlbumsController(ApiService apiService) {
+    public AlbumsController(AlbumsApiService apiService) {
         this.apiService = apiService;
     }
 
